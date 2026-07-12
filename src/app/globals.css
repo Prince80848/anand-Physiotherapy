@@ -1,26 +1,363 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* =============================================
+   DESIGN SYSTEM — Anand Physiotherapy
+   Aesthetic: Warm wellness, sage green, natural
+   ============================================= */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Sage Green — Primary */
+  --color-sage-50:  #f0f4f2;
+  --color-sage-100: #d9e8e1;
+  --color-sage-200: #b4d1c4;
+  --color-sage-300: #88b5a0;
+  --color-sage-400: #5f9780;
+  --color-sage-500: #4a7d67;
+  --color-sage-600: #3d6856;
+  --color-sage-700: #345748;
+  --color-sage-800: #2d473c;
+  --color-sage-900: #273c33;
+
+  /* Warm Cream — Background */
+  --color-cream-50:  #fdfcfa;
+  --color-cream-100: #faf7f2;
+  --color-cream-200: #f5f0e8;
+  --color-cream-300: #ede5d8;
+  --color-cream-400: #ddd0be;
+  --color-cream-500: #c9b89f;
+
+  /* Warm Charcoal — Text */
+  --color-charcoal-900: #1c1c1a;
+  --color-charcoal-800: #2e2e2c;
+  --color-charcoal-700: #3f3f3c;
+  --color-charcoal-600: #555552;
+  --color-charcoal-400: #8a8a85;
+  --color-charcoal-300: #b0b0aa;
+  --color-charcoal-200: #d4d4ce;
+
+  /* Font */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background: #fdfcfa;
+  color: #2e2e2c;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ── Typography ────────────────────────────── */
+.heading-display {
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #1c1c1a;
+}
+
+.heading-xl {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: #1c1c1a;
+}
+
+.heading-lg {
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: #1c1c1a;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a7d67;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Gradients / Backgrounds ───────────────── */
+.bg-sage-gradient {
+  background: linear-gradient(135deg, #4a7d67 0%, #3d6856 100%);
+}
+
+.bg-hero {
+  background: #fdfcfa;
+}
+
+.bg-section-alt {
+  background: #faf7f2;
+}
+
+.bg-dark-section {
+  background: linear-gradient(135deg, #273c33 0%, #345748 100%);
+}
+
+/* ── Buttons ───────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 1.75rem;
+  background: #4a7d67;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(74, 125, 103, 0.3);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: #3d6856;
+  box-shadow: 0 6px 20px rgba(74, 125, 103, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 1.75rem;
+  background: transparent;
+  color: #2e2e2c;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  border: 1.5px solid #c9b89f;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  border-color: #4a7d67;
+  color: #4a7d67;
+  background: #f0f4f2;
+}
+
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 1.75rem;
+  background: white;
+  color: #4a7d67;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-white:hover {
+  background: #f0f4f2;
+  transform: translateY(-1px);
+}
+
+/* ── Cards ─────────────────────────────────── */
+.service-card {
+  background: white;
+  border: 1px solid #ede5d8;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: #88b5a0;
+  box-shadow: 0 12px 32px rgba(74, 125, 103, 0.1);
+  transform: translateY(-3px);
+}
+
+.service-icon {
+  width: 3rem;
+  height: 3rem;
+  background: #f0f4f2;
+  border-radius: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.25s ease;
+}
+
+.service-card:hover .service-icon {
+  background: #4a7d67;
+}
+
+/* ── Layout ─────────────────────────────────── */
+.section-py {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-py {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+  }
+}
+
+.container-xl {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-xl { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .container-xl { padding-left: 2rem; padding-right: 2rem; }
+}
+
+/* ── Navbar ─────────────────────────────────── */
+.nav-link {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #3f3f3c;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #4a7d67;
+}
+
+/* ── Shapes / Decorative ───────────────────── */
+.blob-shape {
+  border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+}
+
+/* ── Benefit check item ─────────────────────── */
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9375rem;
+  color: #3f3f3c;
+  font-weight: 500;
+}
+
+.check-icon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #4a7d67;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.7rem;
+}
+
+/* ── Testimonial card ───────────────────────── */
+.testimonial-card {
+  background: white;
+  border: 1px solid #ede5d8;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 8px 24px rgba(74, 125, 103, 0.1);
+}
+
+/* ── Animations ─────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.65s ease forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* ── Scrollbar ──────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #faf7f2; }
+::-webkit-scrollbar-thumb { background: #88b5a0; border-radius: 9999px; }
+
+/* ── Focus ──────────────────────────────────── */
+:focus-visible { outline: 2px solid #4a7d67; outline-offset: 2px; }
+
+/* ── Services Dropdown ──────────────────────── */
+.services-dropdown {
+  box-shadow:
+    0 4px 6px -1px rgba(0,0,0,0.07),
+    0 20px 50px -10px rgba(0,0,0,0.18),
+    0 0 0 1px rgba(0,0,0,0.03);
+}
+
+/* ── Line-clamp utility ─────────────────────── */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Process timeline connector ─────────────── */
+@media (max-width: 767px) {
+  /* On mobile, hide the center line and show left-rail */
+  .timeline-line {
+    display: none;
+  }
+}
+
+/* ── Backdrop blur fallback ──────────────────── */
+@supports not (backdrop-filter: blur(1px)) {
+  .backdrop-blur-sm { background: rgba(255,255,255,0.95); }
+}
+
