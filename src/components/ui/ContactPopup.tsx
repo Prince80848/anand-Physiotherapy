@@ -9,6 +9,7 @@ import FormInput from "@/components/forms/FormInput";
 export default function ContactPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -42,20 +43,29 @@ export default function ContactPopup() {
   }, [isOpen]);
 
   const onSubmit = async (data: ContactFormData) => {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (res.ok) {
-      reset();
-      setSubmitted(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (res.ok && result.success) {
+        reset();
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.error || "Unable to send request. Please call us directly.");
+      }
+    } catch {
+      setSubmitError("Network error. Please call us directly.");
     }
   };
 
   const handleClose = () => {
     setIsOpen(false);
     setSubmitted(false);
+    setSubmitError(null);
   };
 
   if (!isOpen) return null;
@@ -71,7 +81,7 @@ export default function ContactPopup() {
         {/* Green Header */}
         <div className="cp-header">
           <div>
-            <span className="cp-pill">?? Free Consultation</span>
+            <span className="cp-pill">✨ Free Consultation</span>
             <h2 id="cp-heading" className="cp-title">Book Your Appointment</h2>
             <p className="cp-subtitle">We&apos;ll call you back to confirm the slot.</p>
           </div>
@@ -101,6 +111,12 @@ export default function ContactPopup() {
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="cp-form" noValidate>
+              {submitError && (
+                <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-800">
+                  <p className="font-semibold">Could not send request</p>
+                  <p className="mt-0.5">{submitError}</p>
+                </div>
+              )}
               <div className="cp-form-row">
                 <FormInput
                   label="Full Name"
